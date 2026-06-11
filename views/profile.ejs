@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/manifest.json">
+  <title>Profile - Track App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #cfd2df63 0%, #a6e65d 100%);
+      min-height: 100vh;
+      padding: 0;
+      padding-bottom: 80px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    .header h1 {
+      color: #333;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p {
+      color: #666;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+        .card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+
+  padding: 24px;
+  margin-bottom: 20px;
+
+  box-shadow:
+    0 8px 32px rgba(34, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+    .card h3 {
+      color: #333;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .user-details h4 {
+      color: #333;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .user-details p {
+      color: #666;
+      font-size: 14px;
+    }
+    .date-section {
+      margin-bottom: 24px;
+    }
+    .date-header {
+      color: #667eea;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .history-item {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .history-item.completed {
+      background: #e8f5e9;
+    }
+    .history-item.completed .history-name {
+      text-decoration: line-through;
+      color: #888;
+    }
+    .history-name {
+      color: #333;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .history-time {
+      color: #666;
+      font-size: 12px;
+    }
+    .history-status {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .history-status.completed {
+      background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+      color: white;
+    }
+    .history-status.pending {
+      background: #e0e0e0;
+      color: #888;
+    }
+    .empty-history {
+      text-align: center;
+      color: #666;
+      padding: 40px 20px;
+    }
+    .empty-history p {
+      font-size: 14px;
+      color: #888;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #888;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+    .nav-item.active {
+      color: #667eea;
+    }
+    .nav-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="card">
+      <div class="profile-info">
+        <div class="avatar">
+          <%= user.displayName ? user.displayName.charAt(0).toUpperCase() : 'U' %>
+        </div>
+        <div class="user-details">
+          <h4><%= user.displayName || 'User' %></h4>
+          <p><%= user.email %></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Task History</h3>
+      <% if (Object.keys(tasksByDate).length > 0) { %>
+        <% Object.keys(tasksByDate).forEach(function(dateKey) { %>
+          <div class="date-section">
+            <div class="date-header"><%= dateKey %></div>
+            <% tasksByDate[dateKey].forEach(function(task) { %>
+              <div class="history-item <%= task.completed ? 'completed' : '' %>">
+                <div>
+                  <div class="history-name"><%= task.taskName %></div>
+                  <% if (task.ifLectureTimeInMinutes > 0) { %>
+                    <div class="history-time">⏱ <%= task.ifLectureTimeInMinutes %> min</div>
+                  <% } %>
+                </div>
+                <div class="history-status <%= task.completed ? 'completed' : 'pending' %>">
+                  <%= task.completed ? '✓' : '○' %>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="empty-history">
+          <p>No task history yet. Start adding tasks!</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  
+  <nav class="bottom-nav">
+    <a href="/task" class="nav-item">
+      <div class="nav-icon">📋</div>
+      <div>Tasks</div>
+    </a>
+    <a href="/habit" class="nav-item">
+      <div class="nav-icon">🎯</div>
+      <div>Habits</div>
+    </a>
+    <a href="/users/profile" class="nav-item active">
+      <div class="nav-icon">👤</div>
+      <div>Profile</div>
+    </a>
+  </nav>
+  
+  <script>
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
